@@ -17,7 +17,12 @@ form {
     height: 50px;
     margin: 10px;
   }
-  div#password {
+  div.pass {
     margin-left: 5px;
+  }
+  button {
+    margin-left: 130px;
+    width: 302px;
+    height: 50px;
   }
 }
