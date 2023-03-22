@@ -20,7 +20,7 @@ form input {
   height: 50px;
   margin: 10px;
 }
-form div#pass {
+form div.pass {
   margin-left: 5px;
 }
 form button {
