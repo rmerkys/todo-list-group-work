@@ -5,6 +5,7 @@
 
 body {
   background: linear-gradient(to right, #00467f, #a5cc82);
+  padding: 10px;
 }
 
 form {
@@ -35,11 +36,18 @@ form#login input {
   background: none;
   border-radius: 8px;
 }
+form#login input:focus {
+  outline: none;
+  font-size: 20px;
+}
 form#login button {
   background: none;
   border: 2px solid black;
   margin: 0 10px;
   width: 203px;
+  font-weight: bold;
+  font-size: 19px;
+  letter-spacing: 1px;
 }
 form#login button:hover {
   background: #476d8d;
@@ -62,12 +70,20 @@ form#register div.form-field input {
   border: 2px solid black;
   background: none;
   border-radius: 8px;
+  width: 218px;
+}
+form#register div.form-field input:focus {
+  outline: none;
+  font-size: 20px;
 }
 form#register div.form-field button {
   background: none;
   border: 2px solid black;
   margin: 2px 0;
-  width: 203px;
+  width: 220px;
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 form#register div.form-field button:hover {
   background: #476d8d;
@@ -81,10 +97,12 @@ button#appendRegister {
   top: 0;
   right: 0;
   width: 200px;
-  height: 30px;
+  height: 50px;
   border-radius: 8px;
   border: 1px solid black;
   background: #00467f;
+  font-size: 18px;
+  font-weight: bold;
 }
 button#appendRegister:hover {
   background: #476d8d;
