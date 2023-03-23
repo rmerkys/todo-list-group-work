@@ -6,19 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="index.js"></script>
   </head>
   <body>
-    <form id="register">
-      <h1>Register</h1>
-      <div class="form-field">
-        <label for="username">Username:</label>
-        <input type="text" name="password" id="username" />
-      </div>
-      <div class="form-field">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" />
-      </div>
-      <button type="submit">Registruotis</button>
-    </form>
+    <main>
+      <form id="login">
+        <div class="form-field">
+          <label for="username">Username:</label>
+          <input type="text" name="password" id="username" />
+        </div>
+        <div class="form-field">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <button type="submitLogin">Prisijungti</button>
+      </form>
+      <form id="register">
+        <h1>Register</h1>
+        <div class="form-field">
+          <label for="username">Username:</label>
+          <input type="text" name="password" id="username" />
+        </div>
+        <div class="form-field">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="form-field">
+          <label for="password">Repeat-Password:</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="form-field">
+          <button type="submitRegister">Registruotis</button>
+        </div>
+      </form>
+    </main>
+    <button id="appendRegister">Register</button>
   </body>
 </html>
