@@ -1,10 +1,7 @@
-const loginFormContainer = document.querySelector("#loginFormContainer");
-const loginForm = document.querySelector("#login")
-const username = document.querySelector("#username")
-const password = document.querySelector("#password")
-const registerFormContainer = document.querySelector("#registerContainer");
-const registerForm = document.querySelector("#register")
-
+const loginForm = document.querySelector("#login");
+const username = document.querySelector("#username");
+const password = document.querySelector("#password");
+const registerForm = document.querySelector("#register");
 
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -15,8 +12,8 @@ loginForm.addEventListener("submit", function (event) {
     .then((data) => {
       const newLogin = data.data.filter((user) => {
         if (
-          user.username === username.value &&
-          user.password === password.value
+          user.username == username.value &&
+          user.password == password.value
         ) {
           const userString = JSON.stringify(username.value);
           localStorage.setItem("identification", `${userString}`);
@@ -24,29 +21,14 @@ loginForm.addEventListener("submit", function (event) {
           // createForm.style.display = "block";
           username.value = "";
           password.value = "";
+          window.location = "tasks.html";
           return;
         }
         return;
       });
-      const newLogin2 = data.data.filter((user) => {
-        if (
-          user.username !== username.value &&
-          user.password !== password.value
-        ) {
-          // username.style.border = "1px solid red";
-          // password.style.border = "1px solid red";
-          username.value = "";
-          password.value = "";
-          return;
-        }
-        return;
-      });
-      if (newLogin2) {
-        alert("neteisingai ivesti prisijungimo duomenys")
-      }
     })
     .catch((err) => console.log(err));
-})
+});
 
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -79,9 +61,6 @@ registerForm.addEventListener("submit", async (e) => {
       .catch((err) => console.log(err));
   }
 });
-
-
-
 const appendBtn = document.getElementById("appendRegister");
 
 appendBtn.addEventListener("click", function () {
