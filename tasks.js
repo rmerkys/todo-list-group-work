@@ -1,59 +1,101 @@
-// sukuria panaikinimo mygtuka prie tasku
-let myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
+const taskInput = document.querySelector(".task-input input"),
+  filters = document.querySelectorAll(".filters span"),
+  clearAll = document.querySelector(".clear-btn"),
+  taskBox = document.querySelector(".task-box");
+let editId,
+  isEditTask = false,
+  todos = JSON.parse(localStorage.getItem("todo-list"));
+filters.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector("span.active").classList.remove("active");
+    btn.classList.add("active");
+    showTodo(btn.id);
+  });
+});
+function showTodo(filter) {
+  let liTag = "";
+  if (todos) {
+    todos.forEach((todo, id) => {
+      let completed = todo.status == "completed" ? "checked" : "";
+      if (filter == todo.status || filter == "all") {
+        liTag += `<li class="task">
+                <label for="${id}">
+                <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
+                <p class="${completed}">${todo.name}</p>
+                </label>
+                <div class="settings">
+                <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
+                <ul class="task-menu">
+                <li onclick='editTask(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                <li onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
+                </ul>
+                </div>
+                </li>`;
+      }
+    });
+  }
+  taskBox.innerHTML = liTag || `<span>Čia nėra jokių užduočių</span>`;
+  let checkTask = taskBox.querySelectorAll(".task");
+  !checkTask.length
+    ? clearAll.classList.remove("active")
+    : clearAll.classList.add("active");
+  taskBox.offsetHeight >= 300
+    ? taskBox.classList.add("overflow")
+    : taskBox.classList.remove("overflow");
 }
-
-// panaikina uzduoti
-let close = document.getElementsByClassName("close");
-let i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    let div = this.parentElement;
-    div.style.display = "none";
-  };
-}
-
-// uzdeda checked class lista
-let list = document.querySelector("ul");
-list.addEventListener(
-  "click",
-  function (ev) {
-    if (ev.target.tagName === "LI") {
-      ev.target.classList.toggle("checked");
+showTodo("all");
+function showMenu(selectedTask) {
+  let menuDiv = selectedTask.parentElement.lastElementChild;
+  menuDiv.classList.add("show");
+  document.addEventListener("click", (e) => {
+    if (e.target.tagName != "I" || e.target != selectedTask) {
+      menuDiv.classList.remove("show");
     }
-  },
-  false
-);
-
-// sukuria naujus uzduoziu elementus
-function newElement() {
-  let li = document.createElement("li");
-  let inputValue = document.getElementById("myInput").value;
-  let t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === "") {
-    alert("Turite kažka parašyti :)");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      let div = this.parentElement;
-      div.style.display = "none";
-    };
-  }
+  });
 }
+function updateStatus(selectedTask) {
+  let taskName = selectedTask.parentElement.lastElementChild;
+  if (selectedTask.checked) {
+    taskName.classList.add("checked");
+    todos[selectedTask.id].status = "completed";
+  } else {
+    taskName.classList.remove("checked");
+    todos[selectedTask.id].status = "pending";
+  }
+  localStorage.setItem("todo-list", JSON.stringify(todos));
+}
+function editTask(taskId, textName) {
+  editId = taskId;
+  isEditTask = true;
+  taskInput.value = textName;
+  taskInput.focus();
+  taskInput.classList.add("active");
+}
+function deleteTask(deleteId, filter) {
+  isEditTask = false;
+  todos.splice(deleteId, 1);
+  localStorage.setItem("todo-list", JSON.stringify(todos));
+  showTodo(filter);
+}
+clearAll.addEventListener("click", () => {
+  isEditTask = false;
+  todos.splice(0, todos.length);
+  localStorage.setItem("todo-list", JSON.stringify(todos));
+  showTodo();
+});
+taskInput.addEventListener("keyup", (e) => {
+  let userTask = taskInput.value.trim();
+  if (e.key == "Enter" && userTask) {
+    if (!isEditTask) {
+      todos = !todos ? [] : todos;
+      let taskInfo = { name: userTask, status: "pending" };
+      todos.push(taskInfo);
+    } else {
+      isEditTask = false;
+      todos[editId].name = userTask;
+    }
+    taskInput.value = "";
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo(document.querySelector("span.active").id);
+  }
+});
