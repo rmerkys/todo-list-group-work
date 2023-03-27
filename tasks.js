@@ -35,13 +35,7 @@ function showTodo(filter) {
     });
   }
   taskBox.innerHTML = liTag || `<span>Čia nėra jokių užduočių</span>`;
-  let checkTask = taskBox.querySelectorAll(".task");
-  !checkTask.length
-    ? clearAll.classList.remove("active")
-    : clearAll.classList.add("active");
-  taskBox.offsetHeight >= 300
-    ? taskBox.classList.add("overflow")
-    : taskBox.classList.remove("overflow");
+  clearAll.classList.add("active");
 }
 showTodo("all");
 function showMenu(selectedTask) {
@@ -88,7 +82,7 @@ taskInput.addEventListener("keyup", (e) => {
   if (e.key == "Enter" && userTask) {
     if (!isEditTask) {
       todos = !todos ? [] : todos;
-      let taskInfo = { name: userTask, status: "pending" };
+      let taskInfo = { name: userTask };
       todos.push(taskInfo);
     } else {
       isEditTask = false;

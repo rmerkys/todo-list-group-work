@@ -29,11 +29,6 @@ body {
   padding: 0 25px;
   position: relative;
 }
-.task-input img {
-  top: 50%;
-  position: absolute;
-  transform: translate(17px, -50%);
-}
 .task-input input {
   height: 100%;
   width: 100%;
@@ -85,14 +80,14 @@ li {
   letter-spacing: 0.3px;
   pointer-events: none;
   transition: transform 0.25s ease;
-  background: linear-gradient(135deg, #1798fb 0%, #2d5cfe 100%);
+  background: linear-gradient(to right, #00467f, #a5cc82);
 }
 .clear-btn.active {
   opacity: 0.9;
   pointer-events: auto;
 }
 .clear-btn:active {
-  transform: scale(0.93);
+  transform: scale(0.5);
 }
 .task-box {
   margin-top: 20px;
@@ -103,17 +98,7 @@ li {
   overflow-y: auto;
   max-height: 300px;
 }
-.task-box::-webkit-scrollbar {
-  width: 5px;
-}
-.task-box::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 25px;
-}
-.task-box::-webkit-scrollbar-thumb {
-  background: #e6e6e6;
-  border-radius: 25px;
-}
+
 .task-box .task {
   list-style: none;
   font-size: 17px;
@@ -159,7 +144,6 @@ li {
   border-radius: 4px;
   transform: scale(0);
   transform-origin: top right;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
 }
 .task-box .task:last-child .task-menu {
