@@ -21,7 +21,7 @@ loginForm.addEventListener("submit", function (event) {
           // createForm.style.display = "block";
           username.value = "";
           password.value = "";
-          window.location = "tasks.html";
+          window.location = "task2.html";
           return;
         }
         return;
