@@ -1,40 +1,37 @@
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Todo List App in JavaScript | CodingNepal</title>
-    <link rel="stylesheet" href="task2.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Iconscout Link For Icons -->
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
-    />
+    <title>Document</title>
+    <link rel="stylesheet" href="task2.css" />
+    <script defer src="task2.js"></script>
   </head>
   <body>
-      <div class="task-input">
-        <input class="taskInput" type="text" placeholder="Sukūrti naują užduoti" />
-        <button class="taskBtn" id="addTaskButton">Pridedi uzduoti</button>
-      </div>
-      <ul class="task-box">
-        <li>
+      <form class="task-input" id="task-input">
+        <input id="taskInput" class="taskInput" type="text" placeholder="Sukurti naują užduoti" />
+        <button class="taskBtn" id="addTaskButton" type="submit">Pridėti užduotį</button>
+      </form>
+      <ul class="task-box" id="task-box">
+        <!-- <li>
           <input type="checkbox" id="done">
           <p>Uzduotis</p>
-          <button class="buttons" id="editBtn">Edit</button>
-          <button id="deleteBtn">Delete</button>
+          <button class="buttons" id="editBtn">Redaguoti</button>
+          <button id="deleteBtn">Ištrinti</button>
         </li>
         <li>
           <input type="checkbox" id="done">
           <p>Uzduotis</p>
-          <button class="buttons" id="editBtn">Edit</button>
-          <button id="deleteBtn">Delete</button>
+          <button class="buttons" id="editBtn">Redaguoti</button>
+          <button id="deleteBtn">Ištrinti</button>
         </li>
         <li>
           <input type="checkbox" id="done">
           <p>Uzduotis</p>
-          <button class="buttons" id="editBtn">Edit</button>
-          <button id="deleteBtn">Delete</button>
-        </li>
+          <button class="buttons" id="editBtn">Redaguoti</button>
+          <button id="deleteBtn">Ištrinti</button>
+        </li> -->
       </ul>
-    <!-- <script src="tasks.js"></script> -->
   </body>
 </html>
