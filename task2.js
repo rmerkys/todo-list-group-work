@@ -6,6 +6,7 @@ const API_ENDPOINTS = {
   post: "https://testapi.io/api/RokasM/resource/tasks",
   get: "https://testapi.io/api/RokasM/resource/tasks",
   getPostById: (id) => `	https://testapi.io/api/RokasM/resource/tasks/${id}`,
+  PUT: (id) => `	https://testapi.io/api/RokasM/resource/tasks/${id}`,
   edit: (id) => `https://testapi.io/api/RokasM/resource/tasks/${id}`,
   delete: (id) => `https://testapi.io/api/RokasM/resource/tasks/${id}`,
 };
@@ -30,9 +31,9 @@ const editData = (url, data) => {
   return fetch(url, {
     method: "PUT",
     body: data,
-          headers: {
-        "Content-Type": "application/json",
-      },
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((response) => response.json())
     .then((data) => data)
@@ -49,17 +50,16 @@ const deletePost = (id) => {
     .catch((err) => console.log(err));
 };
 const postData = (url, data) => {
-
-  const task = document.getElementById("taskInput").value
+  const task = document.getElementById("taskInput").value;
   return fetch(url, {
     method: "POST",
-          body: JSON.stringify({
-        task: task,
-        check: "unchecked",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    body: JSON.stringify({
+      task: task,
+      check: "false",
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((response) => response.json())
     .then((data) => {
@@ -69,43 +69,44 @@ const postData = (url, data) => {
 };
 const postTemplate = (data) => {
   const x = JSON.stringify(data);
-  console.log(data)
+  console.log(data);
   return `
 <li id=${data.id}>
-    <input type="checkbox" id="done" value=${data.check}>
+    <input type="checkbox"  id="done"  ${data.check} onclick="myFunction(${data.id})">
     <p>${data.task}</p>
     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
 </li>
  `;
 };
+
 const handlePostEdit = async (id) => {
   editPostId = id;
   const postDataById = await getPostById(id);
   const arr = [...addTaskForm.getElementsByTagName("input")];
-  console.log(postDataById)
+  console.log(postDataById);
   arr.forEach((input) => {
-    console.log(input)
+    console.log(input);
     input.value = postDataById.task;
   });
   handleButtonName("Redaguoti užduotį");
 };
 const handlePostUpdate = async (formData, id) => {
-  const getDataById = await getPostById(id)
-  console.log(id)
+  const getDataById = await getPostById(id);
+  console.log(id);
   const updatedPost = await editData(
     API_ENDPOINTS.edit(id),
-    JSON.stringify({task:formData, check:getDataById.check})
+    JSON.stringify({ task: formData, check: getDataById.check })
   );
   document.getElementById(id).remove();
   taskContainer.innerHTML += postTemplate(updatedPost);
   editPostId = null;
-  handleButtonName("Add Post");
+  handleButtonName("Pridėti užduotį");
 };
 const handleFormSubmit = async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
- const etarget = e.target.elements[0].value
+  const etarget = e.target.elements[0].value;
   if (editPostId) {
     handlePostUpdate(etarget, editPostId);
     // const values = formData.values()
@@ -123,7 +124,6 @@ window.onload = async () => {
     taskContainer.innerHTML += postTemplate(post);
   });
 };
-
 
 // addTaskForm.addEventListener("submit", async (e) => {
 //   e.preventDefault();
@@ -158,5 +158,26 @@ window.onload = async () => {
 //     </li>
 //     `;
 // };
-
-
+function myFunction(id) {
+  var toDoItem = document.getElementById(id);
+  console.log(toDoItem);
+  console.log(id);
+  const toDoFormData = new FormData();
+  toDoFormData.append("task", "123");
+  toDoFormData.append("check", "true");
+  const data = new URLSearchParams(toDoFormData);
+  console.log(data);
+  const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
+  if (toDoItem.checked) {
+    return fetch(url, {
+      method: "PUT",
+      body: data,
+    });
+  } else {
+    const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
+    return fetch(url, {
+      method: "PUT",
+      body: data,
+    });
+  }
+}
