@@ -70,14 +70,34 @@ const postData = (url, data) => {
 const postTemplate = (data) => {
   const x = JSON.stringify(data);
   console.log(data);
-  return `
-<li id=${data.id}>
-    <input type="checkbox"  id="done"  ${data.check} onclick="myFunction(${data.id})">
-    <p>${data.task}</p>
-    <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
-    <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-</li>
- `;
+  if (data.check === "true") {
+    return `
+    <li id=${data.id}>
+        <input type="checkbox"  id="done" checked onclick="myFunction(${data.id})">
+        <p>${data.task}</p>
+        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+    </li>
+     `
+  } else {
+    return `
+    <li id=${data.id}>
+        <input type="checkbox"  id="done" onclick="myFunction(${data.id})">
+        <p>${data.task}</p>
+        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+    </li>
+     `
+  }
+
+//   return `
+// <li id=${data.id}>
+//     <input type="checkbox"  id="done" ${checkBoxLogic} onclick="myFunction(${data.id})">
+//     <p>${data.task}</p>
+//     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+//     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+// </li>
+//  `;
 };
 
 const handlePostEdit = async (id) => {
@@ -159,12 +179,16 @@ window.onload = async () => {
 //     `;
 // };
 function myFunction(id) {
-  var toDoItem = document.getElementById(id);
-  console.log(toDoItem);
-  console.log(id);
+  const toDoItem = document.getElementById(id);
+  const paragraph = toDoItem.getElementsByTagName("p")[0];
+  console.log(paragraph)
+  const paragraphText = paragraph.textContent
+  console.log(paragraphText)
+  const checkBox = toDoItem.getElementsByTagName("input")[0].checked;
+  console.log(checkBox)
   const toDoFormData = new FormData();
-  toDoFormData.append("task", "123");
-  toDoFormData.append("check", "true");
+  toDoFormData.append("task", paragraphText);
+  toDoFormData.append("check", checkBox);
   const data = new URLSearchParams(toDoFormData);
   console.log(data);
   const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
