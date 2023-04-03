@@ -77,8 +77,9 @@ const postTemplate = (data) => {
         <p>${data.task}</p>
         <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+        <i class="fa-regular fa-heart"></i>
     </li>
-     `
+     `;
   } else {
     return `
     <li id=${data.id}>
@@ -86,18 +87,19 @@ const postTemplate = (data) => {
         <p>${data.task}</p>
         <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+        <i class="fa-regular fa-heart"></i>
     </li>
-     `
+     `;
   }
 
-//   return `
-// <li id=${data.id}>
-//     <input type="checkbox"  id="done" ${checkBoxLogic} onclick="myFunction(${data.id})">
-//     <p>${data.task}</p>
-//     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
-//     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-// </li>
-//  `;
+  //   return `
+  // <li id=${data.id}>
+  //     <input type="checkbox"  id="done" ${checkBoxLogic} onclick="myFunction(${data.id})">
+  //     <p>${data.task}</p>
+  //     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+  //     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+  // </li>
+  //  `;
 };
 
 const handlePostEdit = async (id) => {
@@ -181,11 +183,11 @@ window.onload = async () => {
 function myFunction(id) {
   const toDoItem = document.getElementById(id);
   const paragraph = toDoItem.getElementsByTagName("p")[0];
-  console.log(paragraph)
-  const paragraphText = paragraph.textContent
-  console.log(paragraphText)
+  console.log(paragraph);
+  const paragraphText = paragraph.textContent;
+  console.log(paragraphText);
   const checkBox = toDoItem.getElementsByTagName("input")[0].checked;
-  console.log(checkBox)
+  console.log(checkBox);
   const toDoFormData = new FormData();
   toDoFormData.append("task", paragraphText);
   toDoFormData.append("check", checkBox);
@@ -204,4 +206,8 @@ function myFunction(id) {
       body: data,
     });
   }
+}
+var icons = document.getElementsByTagName("i");
+for (var x of document.getElementsByTagName("i")) {
+  x.classList.add = "clicked";
 }

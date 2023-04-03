@@ -27,19 +27,28 @@ main {
   flex-direction: column;
 }
 form#login {
+  width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f3f3f3;
+  margin: 10px;
+  margin-top: 100px;
   input {
-    border: 2px solid black;
-    background: none;
-    border-radius: 8px;
+    background: lightgrey;
+    border: none;
+    margin: 20px;
+    &::placeholder {
+      padding: 0 10px;
+    }
   }
   button {
-    background: none;
-    border: 2px solid black;
+    background: linear-gradient(to right, #00467f, #a5cc82);
     margin: 0 10px;
     width: 203px;
     &:hover {
-      background: #476d8d;
-      color: black;
+      background: linear-gradient(to left, #00467f, #a5cc82);
       cursor: pointer;
       border-radius: 8px;
     }
@@ -49,25 +58,36 @@ form#register {
   display: none;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  justify-content: center;
+  width: 350px;
+  height: 260px;
+  background: white;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #00467f, #a5cc82);
+    margin: 0 10px;
+    width: 203px;
+    &:hover {
+      background: linear-gradient(to left, #00467f, #a5cc82);
+      cursor: pointer;
+      border-radius: 8px;
+    }
+  }
   div.form-field {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     input {
-      border: 2px solid black;
-      background: none;
-      border-radius: 8px;
-    }
-    button {
-      background: none;
-      border: 2px solid black;
-      margin: 2px 0;
-      width: 203px;
-      &:hover {
-        background: #476d8d;
-        color: black;
-        cursor: pointer;
-        border-radius: 8px;
+      background: lightgrey;
+      border: none;
+      height: 35px;
+      margin: 10px;
+      &::placeholder {
+        padding: 0 10px;
       }
     }
   }
@@ -78,8 +98,6 @@ button#appendRegister {
   right: 0;
   width: 200px;
   height: 30px;
-  border-radius: 8px;
-  border: 1px solid black;
   background: #00467f;
   &:hover {
     background: #476d8d;
