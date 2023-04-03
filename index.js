@@ -50,7 +50,7 @@ registerForm.addEventListener("submit", async (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const userString1 = JSON.stringify(username1.value);
+        const userString1 = JSON.stringify(registerUsername.value);
         localStorage.setItem("identification", `${userString1}`);
         registerUsername.value = "";
         registerPassword.value = "";

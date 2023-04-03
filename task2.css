@@ -54,4 +54,14 @@ body {
 .task-box li button {
   min-width: 75px;
   width: 10%;
+}
+.task-box li i {
+  display: flex;
+  color: #00467f;
+  align-items: center;
+  font-size: 20px;
+}
+.task-box li i:hover {
+  color: #a5cc82;
+  cursor: pointer;
 }/*# sourceMappingURL=task2.css.map */
