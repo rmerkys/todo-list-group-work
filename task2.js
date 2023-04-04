@@ -52,7 +52,7 @@ const deletePost = (id) => {
 };
 const postData = (url, data) => {
   const task = document.getElementById("taskInput").value;
-  const favoriteValue = 0
+  const favoriteValue = 0;
   return fetch(url, {
     method: "POST",
     body: JSON.stringify({
@@ -73,40 +73,40 @@ const postData = (url, data) => {
 const postTemplate = (data) => {
   const x = JSON.stringify(data);
   if (data.check === "true" && data.favorite === "1") {
-    const heart = "fa-solid"
+    const heart = "fa-solid";
     return `
-    <li id=${data.id}>
+    <li class="list-top"  id=${data.id}>
         <input type="checkbox"  id="done" checked onclick="myFunction(${data.id})">
-        <p>${data.task}</p>
+        <p class="text">${data.task}</p>
         <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
-     `
+     `;
   } else if (data.check === "false" && data.favorite === "1") {
-    const heart = "fa-solid"
+    const heart = "fa-solid";
     return `
-    <li id=${data.id}>
+    <li class="list-top" id=${data.id}>
         <input type="checkbox"  id="done" onclick="myFunction(${data.id})">
         <p>${data.task}</p>
         <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
-     `
+     `;
   } else if (data.check === "true" && data.favorite === "0") {
-    const heart = "fa-regular"
+    const heart = "fa-regular";
     return `
     <li id=${data.id}>
         <input type="checkbox"  id="done" checked onclick="myFunction(${data.id})">
-        <p>${data.task}</p>
+        <p class="text">${data.task}</p>
         <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
      `;
   } else {
-    const heart = "fa-regular"
+    const heart = "fa-regular";
     return `
     <li id=${data.id}>
         <input type="checkbox"  id="done" onclick="myFunction(${data.id})">
@@ -144,7 +144,11 @@ const handlePostUpdate = async (formData, id) => {
   console.log(id);
   const updatedPost = await editData(
     API_ENDPOINTS.edit(id),
-    JSON.stringify({ task: formData, check: getDataById.check, favorite: getDataById.favorite })
+    JSON.stringify({
+      task: formData,
+      check: getDataById.check,
+      favorite: getDataById.favorite,
+    })
   );
   document.getElementById(id).remove();
   taskContainer.innerHTML += postTemplate(updatedPost);
@@ -180,77 +184,72 @@ function myFunction(id) {
   const paragraphText = paragraph.textContent;
   console.log(paragraphText);
   const checkBox = toDoItem.getElementsByTagName("input")[0].checked;
-  console.log(checkBox)
-  const heart = toDoItem.getElementsByTagName("i")[0]
-  console.log(heart)
-  if (heart.classList.contains("fa-regular")){
-    const favoriteValue = 0
+  console.log(checkBox);
+  const heart = toDoItem.getElementsByTagName("i")[0];
+  console.log(heart);
+  if (heart.classList.contains("fa-regular")) {
+    const favoriteValue = 0;
     const toDoFormData = new FormData();
     toDoFormData.append("task", paragraphText);
     toDoFormData.append("check", checkBox);
-    toDoFormData.append("favorite", favoriteValue)
+    toDoFormData.append("favorite", favoriteValue);
     const data = new URLSearchParams(toDoFormData);
     const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
     fetch(url, {
-        method: "PUT",
-        body: data,
-      });
+      method: "PUT",
+      body: data,
+    });
   } else {
-    const favoriteValue = 1
+    const favoriteValue = 1;
     const toDoFormData = new FormData();
     toDoFormData.append("task", paragraphText);
     toDoFormData.append("check", checkBox);
-    toDoFormData.append("favorite", favoriteValue)
+    toDoFormData.append("favorite", favoriteValue);
     const data = new URLSearchParams(toDoFormData);
     const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
     fetch(url, {
-        method: "PUT",
-        body: data,
-      });
+      method: "PUT",
+      body: data,
+    });
   }
 }
-
 function favorite(id) {
   const toDoItem = document.getElementById(id);
   const paragraph = toDoItem.getElementsByTagName("p")[0];
   // console.log(paragraph)
-  const paragraphText = paragraph.textContent
+  const paragraphText = paragraph.textContent;
   // console.log(paragraphText)
   const checkBox = toDoItem.getElementsByTagName("input")[0].checked;
   // console.log(checkBox)
-  const heart = toDoItem.getElementsByTagName("i")[0]
+  const heart = toDoItem.getElementsByTagName("i")[0];
   // console.log(heart)
-  if (heart.classList.contains("fa-regular")){
-    heart.classList.remove("fa-regular")
-    heart.classList.add("fa-solid")
-    const favoriteValue = 1
+  if (heart.classList.contains("fa-regular")) {
+    heart.classList.remove("fa-regular");
+    heart.classList.add("fa-solid");
+    const favoriteValue = 1;
     const toDoFormData = new FormData();
     toDoFormData.append("task", paragraphText);
     toDoFormData.append("check", checkBox);
-    toDoFormData.append("favorite", favoriteValue)
+    toDoFormData.append("favorite", favoriteValue);
     const data = new URLSearchParams(toDoFormData);
     const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
     fetch(url, {
-        method: "PUT",
-        body: data,
-      });
+      method: "PUT",
+      body: data,
+    });
   } else {
-    heart.classList.remove("fa-solid")
-    heart.classList.add("fa-regular")
-    const favoriteValue = 0
+    heart.classList.remove("fa-solid");
+    heart.classList.add("fa-regular");
+    const favoriteValue = 0;
     const toDoFormData = new FormData();
     toDoFormData.append("task", paragraphText);
     toDoFormData.append("check", checkBox);
-    toDoFormData.append("favorite", favoriteValue)
+    toDoFormData.append("favorite", favoriteValue);
     const data = new URLSearchParams(toDoFormData);
     const url = `https://testapi.io/api/RokasM/resource/tasks/${id}`;
     fetch(url, {
-        method: "PUT",
-        body: data,
-      });
+      method: "PUT",
+      body: data,
+    });
   }
-}
-var icons = document.getElementsByTagName("i");
-for (var x of document.getElementsByTagName("i")) {
-  x.classList.add = "clicked";
 }
