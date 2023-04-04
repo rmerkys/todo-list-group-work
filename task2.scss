@@ -32,6 +32,16 @@ body {
     width: 10%;
     min-width: 75px;
     flex-wrap: nowrap;
+    background: gray;
+    &:hover {
+      cursor: pointer;
+      background: rgb(182, 181, 181);
+    }
+  }
+  input {
+    background: lightgray;
+    border: none;
+    padding: 0 10px;
   }
 }
 
@@ -67,4 +77,25 @@ body {
       }
     }
   }
+}
+.list-top {
+  order: -1;
+}
+#editBtn {
+  background: #00467f;
+  cursor: pointer;
+  &:hover {
+    background: #00467f00;
+  }
+}
+#deleteBtn {
+  background: red;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    background: #a5cc82;
+  }
+}
+.text {
+  text-decoration: line-through;
 }
