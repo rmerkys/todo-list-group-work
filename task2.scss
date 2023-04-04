@@ -56,5 +56,16 @@ body {
       min-width: 75px;
       width: 10%;
     }
+
+    i {
+    display: flex;
+    color: #00467f;
+    align-items: center;
+    font-size: 20px;
+      &:hover {
+      color: #a5cc82;
+      cursor: pointer;     
+   }
+    }
   }
 }
