@@ -104,7 +104,7 @@ const postTemplate = (data) => {
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
-     `
+     `;
   } else {
     const heart = "fa-regular"
     return `
@@ -115,17 +115,17 @@ const postTemplate = (data) => {
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
-     `
+     `;
   }
 
-//   return `
-// <li id=${data.id}>
-//     <input type="checkbox"  id="done" ${checkBoxLogic} onclick="myFunction(${data.id})">
-//     <p>${data.task}</p>
-//     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
-//     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-// </li>
-//  `;
+  //   return `
+  // <li id=${data.id}>
+  //     <input type="checkbox"  id="done" ${checkBoxLogic} onclick="myFunction(${data.id})">
+  //     <p>${data.task}</p>
+  //     <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+  //     <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
+  // </li>
+  //  `;
 };
 
 const handlePostEdit = async (id) => {
@@ -176,9 +176,9 @@ window.onload = async () => {
 function myFunction(id) {
   const toDoItem = document.getElementById(id);
   const paragraph = toDoItem.getElementsByTagName("p")[0];
-  console.log(paragraph)
-  const paragraphText = paragraph.textContent
-  console.log(paragraphText)
+  console.log(paragraph);
+  const paragraphText = paragraph.textContent;
+  console.log(paragraphText);
   const checkBox = toDoItem.getElementsByTagName("input")[0].checked;
   console.log(checkBox)
   const heart = toDoItem.getElementsByTagName("i")[0]
@@ -249,4 +249,8 @@ function favorite(id) {
         body: data,
       });
   }
+}
+var icons = document.getElementsByTagName("i");
+for (var x of document.getElementsByTagName("i")) {
+  x.classList.add = "clicked";
 }
