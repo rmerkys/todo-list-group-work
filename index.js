@@ -3,7 +3,7 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const registerForm = document.querySelector("#register");
 
-loginForm.addEventListener("submit", function (event) {
+loginForm?.addEventListener("submit", function (event) {
   event.preventDefault();
   fetch("https://testapi.io/api/RokasM/resource/Logins", {
     method: "GET",
@@ -30,7 +30,7 @@ loginForm.addEventListener("submit", function (event) {
     .catch((err) => console.log(err));
 });
 
-registerForm.addEventListener("submit", async (e) => {
+registerForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const registerUsername = e.target.elements[0].value;
@@ -63,7 +63,7 @@ registerForm.addEventListener("submit", async (e) => {
 });
 const appendBtn = document.getElementById("appendRegister");
 
-appendBtn.addEventListener("click", function () {
+appendBtn?.addEventListener("click", function () {
   const registerForm = document.getElementById("register");
   if (registerForm.style.display !== "none") {
     registerForm.style.display = "none";
@@ -71,3 +71,6 @@ appendBtn.addEventListener("click", function () {
     registerForm.style.display = "block";
   }
 });
+export const sum = (a, b) => {
+  return a + b;
+};
