@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jsdom": "^21.1.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "parcel index.html"
+  },
+  "name": "testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rmerkys/todo-list-group-work.git",
+  "author": "Andrius Zubkovas <azubkovas27@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel": "^2.8.3"
+  }
+}
