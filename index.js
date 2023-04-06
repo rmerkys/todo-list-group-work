@@ -23,7 +23,7 @@ loginForm?.addEventListener("submit", function (event) {
           password.value = "";
           window.location = "task2.html";
           return;
-        }
+        } else {consoleMessage.textContent = "Credentials are incorrect!"}
         return;
       });
     })
@@ -52,13 +52,22 @@ registerForm?.addEventListener("submit", async (e) => {
       .then((data) => {
         const userString1 = JSON.stringify(registerUsername.value);
         localStorage.setItem("identification", `${userString1}`);
-        registerUsername.value = "";
-        registerPassword.value = "";
-        repeatPassword.value = "";
-        window.location.reload();
+        // registerUsername.value = "";
+        // registerPassword.value = "";
+        // repeatPassword.value = "";
+        // window.location.reload();
         return data;
       })
       .catch((err) => console.log(err));
+
+      consoleMessage.textContent = "Registered sucessfully!"
+
+      username.value = registerUsername
+      password.value = registerPassword
+
+      registerForm.style.display = "none"
+  } else {
+    consoleMessage.textContent = "Passwords do not match!"
   }
 });
 const appendBtn = document.getElementById("appendRegister");
@@ -74,3 +83,8 @@ appendBtn?.addEventListener("click", function () {
 export const sum = (a, b) => {
   return a + b;
 };
+
+
+
+const consoleMessage = document.getElementById('consoleMessage')
+      consoleMessage.style.textAlign = 'center'
