@@ -237,6 +237,7 @@ function favorite(id) {
       method: "PUT",
       body: data,
     });
+    setTimeout(()=>{location.reload()}, 200);
   } else {
     heart.classList.remove("fa-solid");
     heart.classList.add("fa-regular");
@@ -251,5 +252,20 @@ function favorite(id) {
       method: "PUT",
       body: data,
     });
+    setTimeout(()=>{location.reload()}, 200);
   }
 }
+
+
+// async function getTaskById(id) {
+//   try {
+//     const response = await fetch (`https://testapi.io/api/RokasM/resource/tasks/${id}`)
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok')
+      
+//     }
+//     return await response.json();
+//   } catch (error) {
+//     console.error('errer fetching user', error);
+//   }
+// }
