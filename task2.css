@@ -80,11 +80,11 @@ body {
   order: -1;
 }
 
-#editBtn {
+.editBtn {
   background: #00467f;
   cursor: pointer;
 }
-#editBtn:hover {
+.editBtn:hover {
   background: rgba(0, 70, 127, 0);
 }
 
@@ -99,4 +99,17 @@ body {
 
 .text {
   text-decoration: line-through;
+}
+
+#backButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 30px;
+  background: #53a0de;
+}
+#backButton:hover {
+  background: #476d8d;
+  cursor: pointer;
 }/*# sourceMappingURL=task2.css.map */

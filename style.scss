@@ -104,3 +104,16 @@ button#appendRegister {
     cursor: pointer;
   }
 }
+
+#continueButton {
+  position: absolute;
+  top: 0;
+  right: 200px;
+  width: 200px;
+  height: 30px;
+  background: #53a0de;
+  &:hover {
+    background: #476d8d;
+    cursor: pointer;
+  }
+}

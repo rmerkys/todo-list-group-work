@@ -88,3 +88,10 @@ export const sum = (a, b) => {
 
 const consoleMessage = document.getElementById('consoleMessage')
       consoleMessage.style.textAlign = 'center'
+
+
+const continueButton = document.getElementById("continueButton");
+
+continueButton.addEventListener("click", () => {
+  window.location = "task2.html";
+})
