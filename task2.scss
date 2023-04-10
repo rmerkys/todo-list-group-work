@@ -81,7 +81,7 @@ body {
 .list-top {
   order: -1;
 }
-#editBtn {
+.editBtn {
   background: #00467f;
   cursor: pointer;
   &:hover {
@@ -98,4 +98,17 @@ body {
 }
 .text {
   text-decoration: line-through;
+}
+
+#backButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 30px;
+  background: #53a0de;
+  &:hover {
+    background: #476d8d;
+    cursor: pointer;
+  }
 }

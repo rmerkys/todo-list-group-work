@@ -115,4 +115,17 @@ button#appendRegister {
 button#appendRegister:hover {
   background: #476d8d;
   cursor: pointer;
+}
+
+#continueButton {
+  position: absolute;
+  top: 0;
+  right: 200px;
+  width: 200px;
+  height: 30px;
+  background: #53a0de;
+}
+#continueButton:hover {
+  background: #476d8d;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

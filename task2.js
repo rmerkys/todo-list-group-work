@@ -78,9 +78,9 @@ const postTemplate = (data) => {
     <li class="list-top"  id=${data.id}>
         <input type="checkbox"  id="done" checked onclick="myFunction(${data.id})">
         <p class="text">${data.task}</p>
-        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button class="buttons editBtn" onClick=handlePostEdit(${data.id})>Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-        <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
+        <i class="${heart} fa-heart favoriteIcon" onclick="favorite(${data.id})"></i>
     </li>
      `;
   } else if (data.check === "false" && data.favorite === "1") {
@@ -89,9 +89,9 @@ const postTemplate = (data) => {
     <li class="list-top" id=${data.id}>
         <input type="checkbox"  id="done" onclick="myFunction(${data.id})">
         <p>${data.task}</p>
-        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button class="buttons editBtn" onClick=handlePostEdit(${data.id})>Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-        <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
+        <i class="${heart} fa-heart favoriteIcon" onclick="favorite(${data.id})"></i>
     </li>
      `;
   } else if (data.check === "true" && data.favorite === "0") {
@@ -100,7 +100,7 @@ const postTemplate = (data) => {
     <li id=${data.id}>
         <input type="checkbox"  id="done" checked onclick="myFunction(${data.id})">
         <p class="text">${data.task}</p>
-        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button class="buttons editBtn" onClick=handlePostEdit(${data.id})>Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
         <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
     </li>
@@ -111,9 +111,9 @@ const postTemplate = (data) => {
     <li id=${data.id}>
         <input type="checkbox"  id="done" onclick="myFunction(${data.id})">
         <p>${data.task}</p>
-        <button class="buttons" onClick=handlePostEdit(${data.id}) id="editBtn">Redaguoti</button>
+        <button class="buttons editBtn" onClick=handlePostEdit(${data.id})>Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-        <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
+        <i class="${heart} fa-heart favoriteIcon" onclick="favorite(${data.id})"></i>
     </li>
      `;
   }
@@ -168,13 +168,22 @@ const handleFormSubmit = async (e) => {
     taskContainer.innerHTML += postTemplate(newPost);
   }
   e.target.reset();
+
+  if (localStorage.getItem("identification") === null) {
+    location.reload();
+  }
 };
+
 addTaskForm.addEventListener("submit", handleFormSubmit);
+
 window.onload = async () => {
   const posts = await getData(API_ENDPOINTS.get);
   posts.data.forEach((post) => {
     taskContainer.innerHTML += postTemplate(post);
   });
+  showHideButtons();
+  logoutOrBack();
+
 };
 
 function myFunction(id) {
@@ -256,16 +265,53 @@ function favorite(id) {
   }
 }
 
+  
+const allEditButtons = document.getElementsByClassName("editBtn");
+const allFavoriteIcons = document.getElementsByClassName("favoriteIcon");
 
-// async function getTaskById(id) {
-//   try {
-//     const response = await fetch (`https://testapi.io/api/RokasM/resource/tasks/${id}`)
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok')
-      
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error('errer fetching user', error);
-//   }
-// }
+const showHideButtons = () => {
+  if (localStorage.getItem("identification") !== null) {
+    for(let i=0; i< allEditButtons.length; i++){
+      allEditButtons[i].style.display = "inline-block"
+  }
+
+  for(let i=0; i< allFavoriteIcons.length; i++){
+    allFavoriteIcons[i].style.display = "inline-block"
+}
+  } else {
+    for(let i=0; i< allEditButtons.length; i++){
+      allEditButtons[i].style.display = "none"
+  }
+
+  for(let i=0; i< allFavoriteIcons.length; i++){
+    allFavoriteIcons[i].style.display = "none"
+}
+  }
+}
+
+const logoutOrBack = () => {
+  if (localStorage.getItem("identification") !== null) {
+    backButton.innerHTML = "Logout";
+
+    backButton.addEventListener("click", () => {
+      localStorage.removeItem("identification");
+      window.location = "index.html";
+
+    })
+
+  } else {
+      backButton.addEventListener("click", () => {
+      window.location = "index.html";
+    })
+  }
+}
+
+const backButton = document.getElementById("backButton")
+
+const greetings = document.getElementById("greetings")
+
+greetings.innerHTML = "Log in to unlock Edit and Favorite functionality!"
+
+if (localStorage.getItem("identification") !== null) {
+greetings.innerHTML = "Hello, " + localStorage.getItem("identification")
+}
