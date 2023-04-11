@@ -102,7 +102,7 @@ const postTemplate = (data) => {
         <p class="text">${data.task}</p>
         <button class="buttons editBtn" onClick=handlePostEdit(${data.id})>Redaguoti</button>
         <button onClick=deletePost(${data.id}) id="deleteBtn">Ištrinti</button>
-        <i id="icon" class="${heart} fa-heart" onclick="favorite(${data.id})"></i>
+        <i class="${heart} fa-heart favoriteIcon" onclick="favorite(${data.id})"></i>
     </li>
      `;
   } else {
@@ -208,6 +208,7 @@ function myFunction(id) {
       method: "PUT",
       body: data,
     });
+    setTimeout(()=>{location.reload()}, 200);
   } else {
     const favoriteValue = 1;
     const toDoFormData = new FormData();
@@ -220,6 +221,7 @@ function myFunction(id) {
       method: "PUT",
       body: data,
     });
+    setTimeout(()=>{location.reload()}, 200);
   }
 }
 function favorite(id) {
